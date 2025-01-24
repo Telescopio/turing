@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manhattan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .hidden {
+            display: none;
+        }
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Acceso Restringido</h1>
+    <p>Don´t cry ..., not in front of me.</p>
+
+    <input type="password" id="password" placeholder="Contraseña">
+    <button onclick="checkPassword()">Ingresar</button>
+
+    <div id="content" class="hidden">
+        <h2>¡Bienvenidos!</h2>
+        <p id="customMessage">  </p>
+        <p id="customMessage">Espero se encuentren bien todos, les mando un saludo.</p>
+        <p id="customMessage">Decidí programar este pequeño sitio Web como una forma de querer ayudarlos a ustedes.</p>
+        <p id="customMessage">Pido que no se mal entienda, solo que,he estado pensando y al momento de decir "O pasan todos o no pasa ninguno" ,me lo tomé muy personal,</p>
+        <p id="customMessage">es por eso que ahora están aquí, abajo como verán en los botones, están las opciones para descargar el examen global de las unidades 1-8.</p>
+        <p id="customMessage">lastimosamente hay 2 versiones del examen (A y B),sin embargo,a lo que estuve leyendo son lo mismo, solamente que abarcan los temas de forma distinta.</p>
+        <p id="customMessage">Sé que no es la manera más ética de poder acreditar el nivel pero prefiero que a ustedes no les vaya mal, y si van a reprobar, que no sea por el examen.</p>
+        <p id="customMessage">Por lo tanto,vean esto como una guía de estudio e intenten comprender todo en dado caso de que haya pequeñas variables.</p>
+        <p id="customMessage">Manejen esto con extrema discresión para ahorrarnos problemas, cualquier duda saben que pueden contar conmigo.</p>
+        <p id="customMessage">Gracias por hacer más felices mis tardes, los amo con toda el alma,como no tienen una idea.</p>
+        <div class="container">
+            <button onclick="downloadFiles('A')">Descargar Test A</button>
+            <button onclick="downloadFiles('B')">Descargar Test B</button>
+        </div>
+    </div>
+
+    <div id="contentC" class="hidden">
+        <h2>¡Bienvenido a la Opción del cifrado!</h2>
+        <p id="customMessageC"> </p>
+        <p id="customMessageC">He decidido actualizar y añadir este pequeño apartado en caso de que prefieran leer las respuestas en el cifrado tradicional (A,B,C,D).</p>
+        <p id="customMessageC">Por mera deduccion las respuestas van de izquierda a derecha (siendo la primera A, la segunda B,etc) en caso horizontal, en caso vertical aplica igual pero desglozadas hacia abajo (la primera A,etc).</p>
+        <p id="customMessageC">En los ejercicios escritos, seleccioné letras especificas para que recuerden que palabras deben quitar y cuales deben añadir, les recomiendo leer el examen para entender todo al 100%.</p>
+        <p id="customMessageC">Por favor, estudien los verbos, los quiero.</p>
+        <div class="container">
+            <button onclick="downloadEncrypted()">Descargar Respuestas Cifradas</button>
+        </div>
+    </div>
+
+
+    <script>
+        const correctPassword = "Snowman"; 
+        const correctPasswordC = "Telescopio";
+        const customMessage = "Holaa"; 
+        const customMessageC = "Saludos!";
+
+        document.getElementById('customMessage').textContent = customMessage;
+        document.getElementById('customMessageC').textContent = customMessageC;
+
+        function checkPassword() {
+            const passwordInput = document.getElementById('password').value;
+            if (passwordInput === correctPassword) {
+                document.getElementById('content').classList.remove('hidden');
+            } else if (passwordInput === correctPasswordC) {
+                document.getElementById('contentC').classList.remove('hidden');
+            } else {
+                alert('Contraseña incorrecta. Inténtelo de nuevo.');
+            }
+        }
+
+        function downloadFiles(option) {
+            const filesA = ["Test%20A.pdf"];
+            const filesB = ["Test%20B.pdf"];
+
+            const files = option === 'A' ? filesA : filesB;
+
+            files.forEach(file => {
+                const link = document.createElement('a');
+                link.href = file; // Ajusta la ruta si es necesario
+                link.download = file;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }
+
+        function downloadEncrypted() {
+            const encryptedFile = "cifrado.pdf";
+            const link = document.createElement('a');
+            link.href = encryptedFile; // Ajusta la ruta si es necesario
+            link.download = "cifrado.pdf";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
